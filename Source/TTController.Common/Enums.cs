@@ -17,6 +17,7 @@
     {
         Default,
         RiingTrio,
+        SwafanTrio,
         RiingDuo,
         FloeRiing,
         PurePlus

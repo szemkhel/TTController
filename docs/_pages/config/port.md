@@ -76,7 +76,7 @@ Used by effects to know exact led count and zones of each device<br>This ensures
 **Example:**
 ~~~
 "DeviceType": "RiingTrio"
-~~~
+~~~ h
 
 </div>
 

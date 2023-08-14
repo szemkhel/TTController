@@ -63,6 +63,11 @@ namespace TTController.Plugin.PingPongEffect
                             colors.AddRange(colors.ToList());
                             colors.AddRange(GenerateColors(6, portStart, portEnd, radius: 0.33, oddDivide: false));
                             break;
+                        case "SwafanTrio":
+                            colors.AddRange(GenerateColors(12, portStart, portEnd));
+                            colors.AddRange(colors.ToList());
+                            colors.AddRange(GenerateColors(6, portStart, portEnd, radius: 0.33, oddDivide: false));
+                            break;
                         case "RiingDuo":
                             colors.AddRange(GenerateColors(12, portStart, portEnd));
                             colors.AddRange(GenerateColors(6, portStart, portEnd, radius: 0.33, oddDivide: false));

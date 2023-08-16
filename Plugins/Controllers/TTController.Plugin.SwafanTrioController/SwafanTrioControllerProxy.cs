@@ -19,7 +19,8 @@ namespace TTController.Plugin.SwafanTrioController
             };
         }
 
-        public override Version Version {
+        public override Version Version
+        {
             get
             {
                 var bytes = Device.WriteReadBytes(0x33, 0x50);
@@ -40,25 +41,15 @@ namespace TTController.Plugin.SwafanTrioController
             if (!_availableEffects.TryGetValue(effectType, out var mode))
                 return false;
 
-            bool WriteChunk(byte chunkId)
+            var bytes = new List<byte> { 0x32, 0x52, port, mode };
+            foreach (var color in colors)
             {
-                const byte maxPerChunk = 19;
-                var bytes = new List<byte> { 0x32, 0x52, port, mode, 0x03, chunkId, 0x00 };
-                foreach (var color in colors.Skip((chunkId - 1) * maxPerChunk).Take(maxPerChunk))
-                {
-                    bytes.Add(color.G);
-                    bytes.Add(color.R);
-                    bytes.Add(color.B);
-                }
-
-                return Device.WriteReadBytes(bytes)?[3] == 0xfc;
+                bytes.Add(color.G);
+                bytes.Add(color.R);
+                bytes.Add(color.B);
             }
 
-            var result = true;
-            for(byte i = 0x01; i <= 0x02; i++)
-                result &= WriteChunk(i);
-
-            return result;
+            return Device.WriteReadBytes(bytes)?[3] == 0xfc;
         }
 
         public override bool SetSpeed(byte port, byte speed) =>
